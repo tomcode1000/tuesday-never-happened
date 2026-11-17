@@ -2,9 +2,8 @@
 # Add "Tuesday Never Happened" to an EXISTING Lightsail box that already runs Caddy (e.g. the Detour server).
 # It never touches the other apps: own folder, own port, own systemd service, and it only APPENDS a Caddy site block.
 #
-# Run on the server (Lightsail "Connect using SSH"):
-#   curl -fsSL https://raw.githubusercontent.com/<you>/tuesday-never-happened/main/deploy/lightsail-add.sh -o add.sh
-#   bash add.sh tnh.54-255-109-186.sslip.io https://github.com/<you>/tuesday-never-happened.git
+# Private repo: see DEPLOY.md for the deploy-key steps, then run on the server:
+#   bash /opt/tuesday-never-happened/deploy/lightsail-add.sh tnh.54-255-109-186.sslip.io git@github-tnh:tomcode1000/tuesday-never-happened.git
 #
 # API keys are NOT handled here — you paste them into /opt/tuesday-never-happened/.env yourself afterwards.
 set -euo pipefail
@@ -26,8 +25,9 @@ if ss -ltn | grep -q ":$PORT " && ! systemctl is-active --quiet "$SERVICE"; then
 fi
 
 if [ ! -d "$APP/.git" ]; then
-  sudo git clone "$REPO" "$APP"
-  sudo chown -R "$USER":"$USER" "$APP"
+  # clone as the current user (not root) so the user's GitHub deploy key is used for the private repo
+  sudo mkdir -p "$APP" && sudo chown "$USER":"$USER" "$APP"
+  git clone "$REPO" "$APP"
 fi
 
 if [ ! -f "$APP/.env" ]; then
