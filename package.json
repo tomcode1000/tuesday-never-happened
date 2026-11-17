@@ -1,0 +1,13 @@
+{
+  "name": "tuesday-never-happened",
+  "version": "0.1.0",
+  "private": true,
+  "description": "An AI social-deduction game where the investigation software itself is rewriting the evidence.",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

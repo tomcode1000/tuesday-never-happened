@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tuesday Never Happened</title>
+  <meta name="description" content="An AI social-deduction game. Someone inside Envydia leaked the chip. The computer you're investigating on is rewriting the evidence." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Special+Elite&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><ellipse cx='16' cy='16' rx='14' ry='9' fill='%2307120c' stroke='%2339ff88' stroke-width='2'/><circle cx='16' cy='16' r='5' fill='%23ff2e88'/></svg>" />
+</head>
+<body>
+  <!-- BOOT -->
+  <section id="boot">
+    <button id="power" type="button">
+      <span class="power-icon">⏻</span>
+      <span class="power-text">CLICK TO POWER ON</span>
+      <small>headphones recommended</small>
+    </button>
+    <div class="boot-inner">
+      <pre id="bootlog"></pre>
+      <div id="title">
+        <h1 class="glitch-text" data-text="TUESDAY NEVER HAPPENED">TUESDAY NEVER HAPPENED</h1>
+        <p class="tag">Someone inside Envydia leaked the chip.<br />The computer you're investigating on is <em>rewriting the evidence.</em></p>
+      </div>
+      <div id="boot-actions">
+        <button id="btn-new" class="btn big">▶ NEW CASE <small>(AI-generated)</small></button>
+        <button id="btn-00" class="btn ghost">CASE 00 · HALCYON <small>(instant)</small></button>
+        <button id="btn-how" class="btn ghost small">HOW TO PLAY</button>
+        <div id="how" hidden>
+          <ol>
+            <li>15 minutes. 3 suspects. 1 leaked chip spec. One floor of Envydia HQ at 3 AM.</li>
+            <li>Walk the building (WASD / click). Press <b>E</b> to talk to suspects, inspect clues, or use the badge kiosk and your terminal.</li>
+            <li>Rooms can change while you're not in them.</li>
+            <li><b>ARIA</b>, the friendly company AI, runs this computer. It is quietly editing documents <em>after</em> you read them.</li>
+            <li>You have <b>3 integrity checks</b>. Use one on any document to expose edits and restore the original.</li>
+            <li>Suspects remember what really happened — if a record contradicts them, they'll say so.</li>
+            <li>Accuse the leaker. Accuse ARIA too, if you can prove it.</li>
+          </ol>
+        </div>
+        <p id="gen-status" hidden></p>
+        <p id="ai-status">AI link: checking…</p>
+      </div>
+      <p class="disclaimer">Satire. All people, companies and products are fictional.<br />
+        Music: “Night on the Docks – Sax”, “Investigations”, “Hidden Agenda” by Kevin MacLeod (incompetech.com), licensed under CC BY 4.0. Sound effects: Kenney (CC0). Voices: Fish Audio.</p>
+    </div>
+  </section>
+
+  <!-- DESKTOP -->
+  <section id="desktop" hidden>
+    <div id="world"></div>
+    <nav id="icons"></nav>
+    <div id="controls-hint">WASD / arrows or click to walk · <b>E</b> to talk / inspect</div>
+    <div id="windows"></div>
+    <button id="eye" title="ARIA is watching">
+      <svg viewBox="0 0 120 70" aria-hidden="true">
+        <path class="lid" d="M4 35 Q60 -12 116 35 Q60 82 4 35 Z" />
+        <g id="pupil"><circle class="iris" cx="60" cy="35" r="18" /><circle class="core" cx="60" cy="35" r="7" /><circle cx="54" cy="29" r="3" fill="#fff" opacity=".8" /></g>
+      </svg>
+    </button>
+    <div id="toast"></div>
+    <footer id="taskbar">
+      <span class="os">◢ ENVYDIA OS</span>
+      <span id="chips"></span>
+      <span class="spacer"></span>
+      <span class="tb-item" title="Integrity checks remaining">CHECKS <b id="verifies">◆◆◆</b></span>
+      <span class="tb-item" title="Time left">⏱ <b id="timer">15:00</b></span>
+      <span class="tb-item" id="clock">WED 03:00</span>
+      <button id="mute" title="Sound settings">🔊</button>
+    </footer>
+    <div id="mixer" hidden>
+      <h4>AUDIO</h4>
+      <label>MUSIC <input type="range" min="0" max="100" data-vol="music" /></label>
+      <label>AMBIENCE <input type="range" min="0" max="100" data-vol="amb" /></label>
+      <label>EFFECTS <input type="range" min="0" max="100" data-vol="sfx" /></label>
+      <label class="check"><input type="checkbox" data-vol="voice" /> CHARACTER VOICES</label>
+      <button id="mute-all" class="btn small">MUTE ALL</button>
+    </div>
+  </section>
+
+  <!-- CUTSCENES / ENDING -->
+  <section id="stage" hidden></section>
+
+  <div class="crt-film" aria-hidden="true"></div>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
