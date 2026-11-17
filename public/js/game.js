@@ -509,7 +509,7 @@ async function askSuspect(id, text) {
   if (!S || S.over) return;
   // Voice first: keep the "…" bubble up until the audio is actually playing, then type in sync with it.
   let dur = null;
-  if (voice.available && voice.on && !sfx.muted) dur = await Promise.race([voice.say(reply, s.voice || 'neutral'), sleep(7000).then(() => null)]);
+  if (voice.available && voice.on && !sfx.muted) dur = await voice.say(reply, s.voice || 'neutral');
   else await sleep(rand(300, 800));
   if (!S || S.over) return;
   S.pendingReply[id] = false;
@@ -577,7 +577,7 @@ async function askAria(text) {
   }
   sfx.aria();
   // keep her "typing" dots up until her voice actually starts, so text and speech land together
-  if (voice.available && voice.on && !sfx.muted) await Promise.race([voice.say(reply, 'aria'), sleep(7000)]);
+  if (voice.available && voice.on && !sfx.muted) await voice.say(reply, 'aria');
   S.ariaBusy = false;
   ariaPush(reply, true);
 }
@@ -585,7 +585,7 @@ async function askAria(text) {
 async function ariaPush(text, silent = false) {
   if (!silent) {
     sfx.aria();
-    if (voice.available && voice.on && !sfx.muted) await Promise.race([voice.say(text, 'aria'), sleep(7000)]);
+    if (voice.available && voice.on && !sfx.muted) await voice.say(text, 'aria');
   }
   if (!S) return;
   S.aria.push({ role: 'aria', text });
@@ -808,7 +808,7 @@ async function fileAccusation(suspectId, flagAria) {
   sfx.objection();
   sfx.duck(true);
   const text = await objectionSpeech(s, flagAria);
-  const dur = await Promise.race([voice.say(text, 'aria'), sleep(8000).then(() => null)]);
+  const dur = await voice.say(text, 'aria', 10000);
   await typewrite(speech, text, dur ? dur * 1000 : null);
   actions.hidden = false;
   actions.append(

@@ -20,7 +20,8 @@ const KEY = process.env.DEEPSEEK_API_KEY;
 const MODEL = process.env.DEEPSEEK_MODEL || 'deepseek-chat';
 const PUBLIC = path.join(__dirname, 'public');
 const FISH = process.env.FISH_AUDIO_API_KEY || '';
-const FISH_MODEL = process.env.FISH_AUDIO_MODEL || 's1';
+// speech-1.6 measured ~2x faster than s1 (≈1.2s vs 2–2.7s per line) — speed matters more than the last bit of quality here
+const FISH_MODEL = process.env.FISH_AUDIO_MODEL || 'speech-1.6';
 
 // voice key -> Fish Audio library voice id (reference_id). Library voices only — no cloned real people.
 let VOICES = {};
