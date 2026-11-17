@@ -2,8 +2,8 @@
 # Add "Tuesday Never Happened" to an EXISTING Lightsail box that already runs Caddy (e.g. the Detour server).
 # It never touches the other apps: own folder, own port, own systemd service, and it only APPENDS a Caddy site block.
 #
-# Private repo: see DEPLOY.md for the deploy-key steps, then run on the server:
-#   bash /opt/tuesday-never-happened/deploy/lightsail-add.sh tnh.54-255-109-186.sslip.io git@github-tnh:tomcode1000/tuesday-never-happened.git
+# Run on the server (see DEPLOY.md):
+#   bash /opt/tuesday-never-happened/deploy/lightsail-add.sh tuesday-never-happened.54-255-109-186.sslip.io https://github.com/tomcode1000/tuesday-never-happened.git
 #
 # API keys are NOT handled here — you paste them into /opt/tuesday-never-happened/.env yourself afterwards.
 set -euo pipefail

@@ -3,7 +3,7 @@
 **Deadline:** Wed 18 Nov 2026, **22:00 EET** (= 20:00 UTC · 21:00 WAT · 01:30 IST Thu 19 Nov). Voting 23:00 EET.
 
 - [ ] Registered via the Luma link (https://luma.com/zxo77bs4) / organiser's tweet comment
-- [ ] Game hosted: https://tnh.54-255-109-186.sslip.io (see deploy/)
+- [ ] Game hosted: https://tuesday-never-happened.54-255-109-186.sslip.io (see deploy/)
 - [ ] 3-min demo video (VIDEO_SCRIPT.md) — YouTube unlisted
 - [ ] One-page rules — RULES.md
 - [ ] AI stack note — AI_STACK.md
@@ -18,7 +18,7 @@
 >
 > The catch: the company AI is helping them — and it rewrites the evidence after you read it.
 >
-> Play: https://tnh.54-255-109-186.sslip.io
+> Play: https://tuesday-never-happened.54-255-109-186.sslip.io
 > #OperationLeatherJacket
 
 (Attach the demo video or a 20–30 s clip of the badge-log edit + integrity failure.)
