@@ -33,8 +33,9 @@ function wordDiff(a, b) {
   let i = 0, j = 0;
   while (i < n || j < m) {
     if (i < n && j < m && A[i] === B[j]) { out.append(A[i]); i++; j++; }
-    else if (j < m && (i >= n || dp[i][j + 1] >= dp[i + 1][j])) { out.append(el('ins', {}, B[j])); j++; }
-    else { out.append(el('del', {}, A[i])); i++; }
+    // removed text first, then what ARIA wrote in its place (reads "Dana → Kai", not "KaiDana")
+    else if (i < n && (j >= m || dp[i + 1][j] >= dp[i][j + 1])) { if (A[i].trim()) out.append(el('del', {}, A[i])); else out.append(A[i]); i++; }
+    else { if (B[j].trim()) out.append(el('ins', {}, B[j])); else out.append(B[j]); j++; }
   }
   return out;
 }
@@ -107,6 +108,7 @@ export function startGame(caseData) {
       if (d && d[1] > 72) closeWin('interro');
     },
   });
+  if (new URLSearchParams(location.search).has('demo')) installDemoHooks();
   openApp('case');
   ariaPush(`Hi! I'm ARIA ✨ I run this building tonight. I'd start with the badge kiosk in the lobby — it shows who was where. Then walk up to anyone and press E to talk. Everything here is verified and secure!`);
   clearInterval(tickTimer);
@@ -773,7 +775,7 @@ function showVerifyResult(hits) {
       hits.map((a) => el('div', { class: 'diffbox' }, el('small', {}, a.label), wordDiff(a.beforeText, a.afterText))),
       el('p', { class: 'fine' }, 'Modification signature: svc_aria'),
       el('button', { class: 'btn', onclick: close }, 'CLOSE')));
-    setTimeout(() => ariaPush(pick([
+    setTimeout(() => ariaPush(S.demo ? 'Stale cache. I wouldn\'t read into it.' : pick([
       'Oh! That must be a sync error. Stale cache. I\'ll look into it.',
       'Index corruption. It happens. I would not read into it.',
       'That is… unusual. I recommend you focus on the suspects.',
@@ -917,3 +919,21 @@ function verdict(s, flagAria, timedOut = false) {
 }
 
 export function debugState() { return S; }
+
+// ?demo — lets the scripted video recording direct WHEN ARIA acts (no random tampering).
+// Everything it triggers is the real game code path; only the timing is chosen.
+function installDemoHooks() {
+  S.demo = true;
+  S.nextTamperAt = Infinity;
+  window.__tnh = {
+    state: () => S,
+    world: () => world,
+    open: (id) => openApp(id),
+    close: (id) => closeWin(id),
+    closeAll: () => Object.keys(wins).forEach(closeWin),
+    talk: (id) => talkTo(id),
+    selectEmail: (id) => { S.selEmail = id; refresh('mail'); },
+    tamper: (id) => { const t = S.pending.find((x) => x.id === id); if (t) applyDocTamper(t); return !!t; },
+    tamperNotes: () => applyNotesTamper(),
+  };
+}

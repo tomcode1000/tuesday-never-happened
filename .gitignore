@@ -1,3 +1,4 @@
 node_modules
 .env
 video/vo/
+video/out/

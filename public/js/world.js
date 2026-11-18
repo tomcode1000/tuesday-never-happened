@@ -524,6 +524,10 @@ export function createWorld(container, c, hooks) {
   setTimeout(() => showBanner('SECURITY OFFICE'), 400);
 
   return {
+    // used by the scripted demo recording (?demo) to direct the camera; not used in normal play
+    player: () => ({ x: P.x, y: P.y, moving: P.moving || P.path.length > 0 }),
+    walkTo(tx, ty) { const path = bfs(tileOf(P.x, P.y - 2), [tx, ty]); if (path) { P.path = path; P.goal = null; } return !!path; },
+    interactNearest() { if (near) interact(near); return near?.label || null; },
     room: () => room,
     clueRoom: (id) => clues.find((x) => x.id === id)?.room,
     flicker(strong = false) {

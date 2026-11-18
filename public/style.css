@@ -457,7 +457,8 @@ canvas.world { display: block; width: 100%; height: 100%; image-rendering: pixel
 .diffbox { border: 1px solid #b9b39f; background: #f2eee2; padding: 8px 10px; margin: 10px 0; text-align: left; color: #151515; font-family: var(--mono); }
 .diffbox small { display: block; opacity: .6; font-size: 11px; margin-bottom: 4px; }
 .diffbox em { display: block; opacity: .7; font-size: 12px; margin-top: 4px; font-family: var(--type); }
-.diff del { color: #6d6a62; text-decoration: line-through 2px; }
+.diff del { color: #6d6a62; text-decoration: line-through 2px; margin-right: .3em; }
+.diff del + ins::before { content: '→ '; color: #6d6a62; }
 .diff ins { background: rgba(255,46,136,.16); color: var(--pink-ink); text-decoration: none; box-shadow: inset 0 -2px 0 var(--pink); }
 
 /* ── stage: objection + verdict ── */
