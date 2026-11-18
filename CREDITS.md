@@ -4,6 +4,10 @@
 - "Night on the Docks - Sax", "Investigations", "Hidden Agenda" by Kevin MacLeod (incompetech.com)
   Licensed under Creative Commons: By Attribution 4.0 License — http://creativecommons.org/licenses/by/4.0/
 
+## Trailer (30 s)
+- Music: "Crypto" by Kevin MacLeod (incompetech.com), Creative Commons: By Attribution 4.0.
+- Cinematic sound effects: Mixkit (mixkit.co), Mixkit Sound Effects Free License.
+
 ## Sound effects
 - Kenney — Interface Sounds, Impact Sounds, RPG Audio (www.kenney.nl). License: CC0 1.0 (public domain). See `public/audio/sfx/LICENSE-kenney.txt`.
 
